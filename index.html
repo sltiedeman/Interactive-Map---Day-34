@@ -23,14 +23,14 @@
 			<div id="democrat" ng-style="{'width' : bluewidth}"></div>
 
 		</div>
-		
+			
 		<div class="arrow-holder"><div class="arrow-up" style="margin-left:50%"></div></div>
 
 		<div id="main-section">
 			<div id = "svg-container">
 				<svg width="750" height="500" id="svg">
 					<g class="states" ng-repeat="state in states" click-state ng-click="getNewColor(state)">
-						<path class="state {{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white"></path>
+						<path class="{{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white"></path>
 						<foreignObject ng-show="state.nameX != ''" ng-attr-x={{state.nameX}} ng-attr-y={{state.nameY}}>
 							<div class="state-info">
 								{{state.abbr}}<br />
@@ -43,13 +43,13 @@
 				<div id="small-states-container">
 			        <table cellspacing="5">
 			            <tbody>
-				            <tr><td id="sp_25" class="{{states[20].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[20])">11</td><td class="small-state">MA</td></tr>
-				            <tr><td id="sp_25" class="{{states[38].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[38])">4</td><td class="small-state">RI</td></tr>
-				            <tr><td id="sp_25" class="{{states[6].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[6])">7</td><td class="small-state">CT</td></tr>
-				            <tr><td id="sp_25" class="{{states[29].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[29])">14</td><td class="small-state">NJ</td></tr>
-				            <tr><td id="sp_25" class="{{states[7].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[7])">3</td><td class="small-state">DE</td></tr>
-				            <tr><td id="sp_25" class="{{states[48].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[48])">10</td class="small-state"><td>MD</td></tr>
-				            <tr><td id="sp_25" class="{{states[8].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[8])">3</td><td class="small-state">DC</td></tr>	            
+				            <tr><td class="{{states[20].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[20])">11</td><td class="small-state">MA</td></tr>
+				            <tr><td class="{{states[38].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[38])">4</td><td class="small-state">RI</td></tr>
+				            <tr><td class="{{states[6].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[6])">7</td><td class="small-state">CT</td></tr>
+				            <tr><td class="{{states[29].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[29])">14</td><td class="small-state">NJ</td></tr>
+				            <tr><td class="{{states[7].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[7])">3</td><td class="small-state">DE</td></tr>
+				            <tr><td class="{{states[48].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[48])">10</td class="small-state"><td>MD</td></tr>
+				            <tr><td class="{{states[8].stateColor}}" style="width: 20px; height: 20px;" ng-click="getNewColor(states[8])">3</td><td class="small-state">DC</td></tr>	            
 			        	</tbody>
 			        </table>
 			    </div>

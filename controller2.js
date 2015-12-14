@@ -12,9 +12,9 @@ function interactiveMapCntrl($scope){
 	$scope.blueStates = blueStates;
 	$scope.openStates = openStates;
 
+	//Changes the color when a state is clicked.
 	$scope.getNewColor = function(state){
 		if(state.stateColor == 'red'){
-			//add the element to the appropriate array and remove it from the old
 			state.stateColor = "blue";
 			blueStates[state.id] = state;
 			redStates.splice(state.id, 1, emptyState);
@@ -30,6 +30,7 @@ function interactiveMapCntrl($scope){
 		$scope.calculateElectoral();
 	}
 
+	//calculates the number of electoral votes for democrat, republican, and open
 	$scope.calculateElectoral = function(){
 		$scope.republican = 0;
 		$scope.democrat = 0;
@@ -49,12 +50,14 @@ function interactiveMapCntrl($scope){
 				$scope.open += openStates[i].electoralVotes;
 			}
 		}
+
+		//calculates width of bars to show the percentage in red, sand, and blue color
 		$scope.redwidth = ($scope.republican/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
-		$scope.arrowMargin = ($scope.republican/($scope.republican + $scope.democrat + $scope.open)*100)+ '%'; 
 		$scope.openwidth = ($scope.open/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
 		$scope.bluewidth = ($scope.democrat/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
 	}
 
+	//reset the map
 	$scope.reset = function(){
 		initialize();
 		$scope.states = states;
@@ -63,9 +66,6 @@ function interactiveMapCntrl($scope){
 		$scope.openStates = openStates;
 		$scope.calculateElectoral();
 	}
-
-
-	
 
 	$scope.calculateElectoral();
 
