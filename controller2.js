@@ -2,29 +2,33 @@ var stateMap = angular.module('interactiveMap', []);
 
 stateMap.controller('interactiveMapCntrl', interactiveMapCntrl);
 
-stateMap.directive('clickState', function(){
-	return{
-		link: function($scope, element){
-			element.bind('click', function(){
-				var newColor = getNewColor($scope.state);
-				$scope.state.stateColor = newColor;
-				var stateElement = element[0].querySelector('path');
-				stateElement.setAttribute('class', newColor);
-				$scope.redStates = redStates;
-                $scope.blueStates = blueStates;
-                $scope.openStates = openStates;
-                
-			});
-		}
-	}
-})
+
 
 
 function interactiveMapCntrl($scope){
+	initialize();
 	$scope.states = states;
 	$scope.redStates = redStates;
 	$scope.blueStates = blueStates;
 	$scope.openStates = openStates;
+
+	$scope.getNewColor = function(state){
+		if(state.stateColor == 'red'){
+			//add the element to the appropriate array and remove it from the old
+			state.stateColor = "blue";
+			blueStates[state.id] = state;
+			redStates.splice(state.id, 1, emptyState);
+		}else if(state.stateColor == 'blue'){
+			state.stateColor = "open";
+			openStates[state.id] = state;
+			blueStates.splice(state.id, 1, emptyState);
+		}else if(state.stateColor == 'open'){
+			state.stateColor = "red";
+			redStates[state.id] = state;
+			openStates.splice(state.id, 1, emptyState);
+		}
+		$scope.calculateElectoral();
+	}
 
 	$scope.calculateElectoral = function(){
 		$scope.republican = 0;
@@ -46,35 +50,25 @@ function interactiveMapCntrl($scope){
 			}
 		}
 		$scope.redwidth = ($scope.republican/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
+		$scope.arrowMargin = ($scope.republican/($scope.republican + $scope.democrat + $scope.open)*100)+ '%'; 
 		$scope.openwidth = ($scope.open/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
 		$scope.bluewidth = ($scope.democrat/($scope.republican + $scope.democrat + $scope.open)*100) + '%';
 	}
 
 	$scope.reset = function(){
+		initialize();
 		$scope.states = states;
+		$scope.redStates = redStates;
+		$scope.blueStates = blueStates;
+		$scope.openStates = openStates;
 		$scope.calculateElectoral();
 	}
 
+
+	
+
 	$scope.calculateElectoral();
-}
-
-
-function getNewColor(state){
-	if(state.stateColor == 'red'){
-		//add the element to the appropriate array and remove it from the old
-		blueStates[state.id] = state;
-		redStates.splice(state.id, 1, emptyState);
-		console.log(redStates);
-		return "blue";
-	}else if(state.stateColor == 'blue'){
-		openStates[state.id] = state;
-		blueStates.splice(state.id, 1, emptyState);
-		return "open";
-	}else if(state.stateColor == 'open'){
-		redStates[state.id] = state;
-		openStates.splice(state.id, 1, emptyState);
-		return "red";
-	}
 
 }
+
 
